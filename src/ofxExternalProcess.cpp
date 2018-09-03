@@ -203,7 +203,11 @@ void ofxExternalProcess::threadedFunction(){
 
 	if(sleepMSAfterFinished > 0){
 		state = SLEEPING_AFTER_RUN;
+#ifdef TARGET_WIN32
+		Sleep(sleepMSAfterFinished); //hold the status output 5 secs on screen
+#else
 		sleep(sleepMSAfterFinished); //hold the status output 5 secs on screen
+#endif
 	}
 
 	pendingNotification = true;
